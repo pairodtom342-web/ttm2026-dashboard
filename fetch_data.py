@@ -140,16 +140,34 @@ def read_sheet():
 # ── Live carbonMICE ─────────────────────────────────────────────────────────
 async def read_live():
     async with async_playwright() as p:
-        b = await p.chromium.launch(headless=True)
-        page = await (await b.new_context()).new_page()
-        await page.goto(f"{AUTH_URL}/auth/sign-in?redirect={PLATFORM}/", wait_until="networkidle")
-        await page.fill('input[type="email"]', EMAIL)
-        await page.fill('input[type="password"]', PASSWORD)
-        await page.click('button[type="submit"]')
-        await page.wait_for_load_state("networkidle"); await page.wait_for_timeout(3000)
-        r = await page.request.get(f"{PLATFORM}/api/dashboard/{EVENT_ID}/emission-detail")
-        data = await r.json() if r.status == 200 else {}
-        await b.close()
+        b = await p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-blink-features=AutomationControlled"])
+        ctx = await b.new_context(
+            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+            viewport={"width": 1366, "height": 900}, locale="th-TH")
+        page = await ctx.new_page()
+        page.set_default_timeout(60000)
+        try:
+            await page.goto(f"{AUTH_URL}/auth/sign-in?redirect={PLATFORM}/", wait_until="domcontentloaded")
+            # รอฟอร์ม login เรนเดอร์ (SPA — ใน CI ช้ากว่า local)
+            await page.wait_for_selector('input[type="email"]', state="visible", timeout=60000)
+            await page.fill('input[type="email"]', EMAIL)
+            await page.fill('input[type="password"]', PASSWORD)
+            await page.click('button[type="submit"]')
+            # รอ redirect กลับ platform (login สำเร็จ)
+            try:
+                await page.wait_for_url(lambda u: PLATFORM in u, timeout=45000)
+            except Exception:
+                await page.wait_for_timeout(4000)
+            await page.wait_for_timeout(2000)
+            r = await page.request.get(f"{PLATFORM}/api/dashboard/{EVENT_ID}/emission-detail")
+            data = await r.json() if r.status == 200 else {}
+            if r.status != 200:
+                print(f"   ⚠️ emission-detail HTTP {r.status} (url={page.url})")
+        except Exception as e:
+            print(f"   ⚠️ login/fetch error: {type(e).__name__} url={page.url}")
+            raise
+        finally:
+            await b.close()
     return (data or {}).get("TotalSummary", {})
 
 
