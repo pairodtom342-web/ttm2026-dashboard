@@ -1,0 +1,18 @@
+# ── secrets / local-only (ห้ามขึ้น repo) ──
+creds.local.json
+token.json
+*token*.json
+
+# logs
+*.log
+fetch.log
+launchd.out.log
+launchd.err.log
+
+# python / os
+__pycache__/
+*.pyc
+.DS_Store
+
+# deploy
+.vercel

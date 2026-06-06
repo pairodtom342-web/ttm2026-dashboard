@@ -1,0 +1,50 @@
+name: Refresh TTM+ carbon data
+
+# รัน fetch_data.py ตามเวลา → push data.json ไป branch "data"
+# (หน้าเว็บบน GitHub Pages ดึง data.json จาก raw URL ของ branch data
+#  → main ไม่เปลี่ยน Pages จึงไม่ rebuild ทุกรอบ กัน rate limit)
+on:
+  schedule:
+    - cron: "*/5 * * * *"      # ทุก 5 นาที (ขั้นต่ำของ GitHub Actions; อาจดีเลย์เล็กน้อย)
+  workflow_dispatch: {}          # ปุ่มรันเองได้จากหน้า Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Fetch latest data (Sheet + Live carbonMICE)
+        env:
+          CARBONMICE_EMAIL:    ${{ secrets.CARBONMICE_EMAIL }}
+          CARBONMICE_PASSWORD: ${{ secrets.CARBONMICE_PASSWORD }}
+          GOOGLE_TOKEN_JSON:   ${{ secrets.GOOGLE_TOKEN_JSON }}
+        run: python fetch_data.py
+
+      - name: Publish data.json → branch "data"
+        run: |
+          mkdir -p /tmp/pub && cp data.json /tmp/pub/data.json
+          cd /tmp/pub
+          git init -q
+          git config user.name  "ttm-dashboard-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout -q -b data
+          git add data.json
+          git commit -q -m "data: $(date -u +%FT%TZ)"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" data:data
