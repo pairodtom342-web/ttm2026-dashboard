@@ -147,9 +147,16 @@ async def read_live():
         page = await ctx.new_page()
         page.set_default_timeout(60000)
         try:
-            await page.goto(f"{AUTH_URL}/auth/sign-in?redirect={PLATFORM}/", wait_until="domcontentloaded")
+            resp = await page.goto(f"{AUTH_URL}/auth/sign-in?redirect={PLATFORM}/", wait_until="domcontentloaded")
+            print(f"   ↪ goto status={resp.status if resp else '?'} url={page.url}")
             # รอฟอร์ม login เรนเดอร์ (SPA — ใน CI ช้ากว่า local)
-            await page.wait_for_selector('input[type="email"]', state="visible", timeout=60000)
+            try:
+                await page.wait_for_selector('input[type="email"]', state="visible", timeout=45000)
+            except Exception:
+                title = await page.title()
+                body = (await page.inner_text("body"))[:400] if await page.query_selector("body") else ""
+                print(f"   🔎 no email field. title={title!r} bodyText={body!r}")
+                raise
             await page.fill('input[type="email"]', EMAIL)
             await page.fill('input[type="password"]', PASSWORD)
             await page.click('button[type="submit"]')
