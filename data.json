@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-06T16:01:55.482245+00:00",
+  "updatedAt": "2026-06-07T12:13:39.768421+00:00",
   "source": "Google Sheet (manual) + Live carbonMICE",
   "event": {
     "nameEN": "Thailand Travel Mart Plus (TTM+) 2026",
@@ -13,22 +13,22 @@
     "standard": "ISO 14064-1:2018"
   },
   "respondents": {
-    "total": 12,
+    "total": 720,
     "items": [
       {
         "label": "Sellers",
-        "value": 0,
-        "percent": 0.0
+        "value": 220,
+        "percent": 30.6
       },
       {
         "label": "Buyers",
-        "value": 0,
-        "percent": 0.0
+        "value": 300,
+        "percent": 41.7
       },
       {
         "label": "Staff",
-        "value": 12,
-        "percent": 100.0
+        "value": 200,
+        "percent": 27.8
       }
     ]
   },
@@ -64,25 +64,25 @@
   },
   "waste": {
     "unitTotal": "kg",
-    "total": 12450.0,
+    "total": 2700.0,
     "categories": [
       {
         "label": "Composting Food Scraps",
-        "value": 4980.0,
+        "value": 900.0,
         "color": "#5FB97A",
-        "percent": 40.0
+        "percent": 33.3
       },
       {
         "label": "Refuse-Derived Fuel",
-        "value": 4350.0,
+        "value": 900.0,
         "color": "#3E86C9",
-        "percent": 34.9
+        "percent": 33.3
       },
       {
         "label": "Recyclables",
-        "value": 3120.0,
+        "value": 900.0,
         "color": "#E8956B",
-        "percent": 25.1
+        "percent": 33.3
       }
     ],
     "days": [
@@ -95,27 +95,27 @@
         "label": "Composting Food Scraps",
         "color": "#5FB97A",
         "values": [
-          1580.0,
-          1680.0,
-          1720.0
+          200.0,
+          300.0,
+          400.0
         ]
       },
       {
         "label": "Refuse-Derived Fuel",
         "color": "#3E86C9",
         "values": [
-          1420.0,
-          1450.0,
-          1480.0
+          200.0,
+          300.0,
+          400.0
         ]
       },
       {
         "label": "Recyclables",
         "color": "#E8956B",
         "values": [
-          990.0,
-          1020.0,
-          1110.0
+          200.0,
+          300.0,
+          400.0
         ]
       }
     ]
