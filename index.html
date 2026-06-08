@@ -411,7 +411,7 @@ function render(d){
 
   // respondents
   const rp=d.respondents||{items:[]};
-  const icons={Sellers:'ic-briefcase',Buyers:'ic-cart',Staff:'ic-badge'};
+  const icons={Sellers:'ic-briefcase',Buyers:'ic-cart',Staff:'ic-badge',Other:'ic-badge'};
   let rh=rp.items.map(it=>`<div class="resp"><div class="ri">${svi(icons[it.label]||'ic-users')}</div><div class="rl">${it.label}</div>
     <div class="rv">${it.value.toLocaleString()}</div><div class="rp">${it.percent}%</div></div>`).join('');
   rh+=`<div class="resp total"><div class="ri">${svi('ic-users')}</div><div class="rl">Total</div>
