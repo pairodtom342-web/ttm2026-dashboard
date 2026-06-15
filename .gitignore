@@ -16,3 +16,6 @@ __pycache__/
 
 # deploy
 .vercel
+
+_local_only/
+*_backup.jpg
