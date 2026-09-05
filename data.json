@@ -1,0 +1,147 @@
+{
+  "updatedAt": "2026-09-05T17:14:45.620923+00:00",
+  "source": "Google Sheet (manual) + Report Excel (post-event)",
+  "event": {
+    "nameEN": "Thailand Travel Mart Plus (TTM+) 2026",
+    "organizer": "Tourism Authority of Thailand",
+    "venue": "Nong Nooch Pattaya International Convention & Exhibition Center",
+    "province": "Chonburi, Thailand",
+    "dateLabel": "10 – 12 June 2026",
+    "startDate": "2026-06-10",
+    "endDate": "2026-06-12",
+    "carbonNeutral": true,
+    "standard": "ISO 14064-1:2018"
+  },
+  "respondents": {
+    "total": 1311,
+    "items": [
+      {
+        "label": "Sellers",
+        "value": 846,
+        "percent": 64.5
+      },
+      {
+        "label": "Buyers",
+        "value": 332,
+        "percent": 25.3
+      },
+      {
+        "label": "Other",
+        "value": 133,
+        "percent": 10.1
+      }
+    ]
+  },
+  "emissions": {
+    "unit": "tCO₂e",
+    "total": 602.76,
+    "scopes": [
+      {
+        "name": "Scope 1",
+        "desc": "Direct emissions from the event",
+        "value": 26.43,
+        "percent": 4.4
+      },
+      {
+        "name": "Scope 2",
+        "desc": "Indirect emissions from energy",
+        "value": 30.58,
+        "percent": 5.1
+      },
+      {
+        "name": "Scope 3",
+        "desc": "Other indirect emissions",
+        "value": 545.76,
+        "percent": 90.5
+      }
+    ]
+  },
+  "offset": {
+    "unit": "tCO₂e",
+    "value": 602.76,
+    "trees": 63448,
+    "treeNote": "medium tree, 10 years old"
+  },
+  "waste": {
+    "unitTotal": "kg",
+    "total": 587.5,
+    "categories": [
+      {
+        "label": "Composting Food Scraps",
+        "value": 145.8,
+        "color": "#5FB97A",
+        "percent": 24.8
+      },
+      {
+        "label": "Refuse-Derived Fuel",
+        "value": 354.6,
+        "color": "#3E86C9",
+        "percent": 60.4
+      },
+      {
+        "label": "Recyclables",
+        "value": 87.1,
+        "color": "#E8956B",
+        "percent": 14.8
+      }
+    ],
+    "days": [
+      "10 June",
+      "11 June",
+      "12 June"
+    ],
+    "daily": [
+      {
+        "label": "Composting Food Scraps",
+        "color": "#5FB97A",
+        "values": [
+          12.0,
+          69.6,
+          64.2
+        ]
+      },
+      {
+        "label": "Refuse-Derived Fuel",
+        "color": "#3E86C9",
+        "values": [
+          121.2,
+          138.6,
+          94.9
+        ]
+      },
+      {
+        "label": "Recyclables",
+        "color": "#E8956B",
+        "values": [
+          16.1,
+          27.1,
+          43.9
+        ]
+      }
+    ]
+  },
+  "wasteReduction": {
+    "unit": "kgCO₂eq",
+    "value": 700.75,
+    "trees": 74,
+    "treeNote": "medium tree, 10 years old"
+  },
+  "benefits": [
+    {
+      "icon": "🌍",
+      "label": "Reduce environmental impact"
+    },
+    {
+      "icon": "🚛",
+      "label": "Reduce waste sent to disposal"
+    },
+    {
+      "icon": "♻️",
+      "label": "Increase resource value"
+    },
+    {
+      "icon": "💡",
+      "label": "Build sustainability awareness"
+    }
+  ]
+}
